@@ -1,4 +1,5 @@
 # Email Events Webhook Catcher
+[![Build Status](https://travis-ci.org/alterenzo/webhook_catcher.svg?branch=master)](https://travis-ci.org/alterenzo/webhook_catcher)
 
 A simple web app designed to receive incoming data from a transactional email API Webhook,
 store it in a database, and display statistics.
