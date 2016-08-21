@@ -12,8 +12,4 @@ class Event < ApplicationRecord
   def self.all_opened
     self.where(event_type: "open")
   end
-
-  def self.click_ratio
-    self.where()
-  end
 end
