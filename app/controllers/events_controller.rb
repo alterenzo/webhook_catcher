@@ -3,13 +3,15 @@ class EventsController < ApplicationController
 
   def create
     data = JSON.parse(request.body.read)
+
     date = timestamp_to_date data["Timestamp"]
     email_type = EmailType.where(name: data["EmailType"]).first_or_create
-    Event.create(address: data["Address"],
+    event = Event.new(address: data["Address"],
                  email_type: email_type,
                  event_type: data["Event"],
                  timestamp: date)
-    redirect_to stats_path
+
+    event.save
   end
 
 private
