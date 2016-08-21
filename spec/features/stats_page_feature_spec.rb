@@ -37,15 +37,15 @@ feature 'stats' do
     5.times { create(:event, email_type: shipment, event_type: "send") }
     5.times { create(:event, email_type: shipment, event_type: "click") }
     5.times { create(:event, email_type: shipment, event_type: "open") }
-    5.times { create(:event, email_type: shipment, event_type: "send") }
-    3.times { create(:event, email_type: shipment, event_type: "click") }
-    2.times { create(:event, email_type: shipment, event_type: "open") }
+    5.times { create(:event, email_type: confirmation, event_type: "send") }
+    3.times { create(:event, email_type: confirmation, event_type: "click") }
+    2.times { create(:event, email_type: confirmation, event_type: "open") }
 
     visit '/stats'
 
-    expect(page).to have_content "Shipment open rate: 33%"
-    expect(page).to have_content "Shipment click rate: 33%"
-    expect(page).to have_content "OrderConfirmation open rate: 20%"
-    expect(page).to have_content "OrderConfirmation click rate: 30%"
+    expect(page).to have_content "Shipment open rate: 33.3%"
+    expect(page).to have_content "Shipment click rate: 33.3%"
+    expect(page).to have_content "OrderConfirmation open rate: 20.0%"
+    expect(page).to have_content "OrderConfirmation click rate: 30.0%"
   end
 end
