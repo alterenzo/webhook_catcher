@@ -3,6 +3,7 @@ require 'rails_helper'
 feature 'stats' do
   scenario 'should display the title of the page' do
     visit '/stats'
+
     expect(page).to have_content "Email Stats"
   end
 
@@ -28,5 +29,23 @@ feature 'stats' do
     visit '/stats'
 
     expect(page).to have_content "Opened Emails 4"
+  end
+
+  scenario 'should display the clicked and opened ratio for every email type' do
+    shipment = create(:email_type, name: "Shipment")
+    confirmation = create(:email_type, name: "OrderConfirmation")
+    5.times { create(:event, email_type: shipment, event_type: "send") }
+    5.times { create(:event, email_type: shipment, event_type: "click") }
+    5.times { create(:event, email_type: shipment, event_type: "open") }
+    5.times { create(:event, email_type: shipment, event_type: "send") }
+    3.times { create(:event, email_type: shipment, event_type: "click") }
+    2.times { create(:event, email_type: shipment, event_type: "open") }
+
+    visit '/stats'
+
+    expect(page).to have_content "Shipment open rate: 33%"
+    expect(page).to have_content "Shipment click rate: 33%"
+    expect(page).to have_content "OrderConfirmation open rate: 20%"
+    expect(page).to have_content "OrderConfirmation click rate: 30%"
   end
 end

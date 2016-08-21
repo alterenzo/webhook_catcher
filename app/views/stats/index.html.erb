@@ -2,4 +2,11 @@
 
 Sent Emails <%= @sent %><br>
 Clicked Emails <%= @clicked %><br>
-Opened Emails <%= @opened %>
+Opened Emails <%= @opened %><br>
+<br>
+<% @email_types.each do |type| %>
+  <%= "#{type.name} open rate: #{number_to_percentage(type.opened_rate * 100, precision: 1)}" %>
+  <br>
+  <%= "#{type.name} click rate: #{number_to_percentage(type.click_rate * 100, precision: 1)}" %>
+  <br><br>
+<% end %>

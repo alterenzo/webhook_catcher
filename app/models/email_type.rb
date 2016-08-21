@@ -1,11 +1,21 @@
 class EmailType < ApplicationRecord
   has_many :events
 
-  def click_ratio
-    self.events.where(event_type: "click").count / self.events.count
+  def click_rate
+    clicked_count / events.count
   end
 
-  def open_ratio
-    self.events.where(event_type: "open").count / self.events.count
+  def opened_rate
+    opened_count / events.count
+  end
+
+  private
+
+  def clicked_count
+    self.events.where(event_type: "click").count.to_f
+  end
+
+  def opened_count
+    self.events.where(event_type: "open").count.to_f
   end
 end
