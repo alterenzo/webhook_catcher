@@ -1,4 +1,5 @@
 class Event < ApplicationRecord
+  validates_presence_of :address, :email_type, :timestamp, :event_type
   belongs_to :email_type
 
   def self.all_sent

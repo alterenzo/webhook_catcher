@@ -1,4 +1,5 @@
 class EmailType < ApplicationRecord
+  validates_presence_of :name
   has_many :events
 
   def click_rate
